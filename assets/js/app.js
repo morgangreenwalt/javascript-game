@@ -36,10 +36,12 @@ $(document).ready(function() {
     // Loop through and display all characters
     for (var i = 0; i < charactersArray.length; i++) {
         var displayCharacters = $(".allCharacters").append("<div class='col-md-3'><div class='char' value='" + charactersArray[i].id + "'><img id='charImage' src=" + charactersArray[i].image + "><h4>" + charactersArray[i].name + "</h4><h4>" + charactersArray[i].startPoints + "</h4></div></div>");
+
+        var displayCharactersBtn = $(".allCharacters").append("<div class='col-md-3'><div class='char' value='" + charactersArray[i].id + "'><img id='charImage' src=" + charactersArray[i].image + "><h4>" + charactersArray[i].name + "</h4><h4>" + charactersArray[i].startPoints + "</h4></div></div>");
         console.log(displayCharacters);
     }
 
-    // User selects character to battle with
+    // User selection
     $(".char").on("click", function() {
         // event.preventDefault();
         $(this).removeClass("char");
@@ -56,9 +58,10 @@ $(document).ready(function() {
             var fighter = $(this);
             $(".fightTime").append(fighter);
         });
-
     });
 
+
+    // Battle
 
 
 
