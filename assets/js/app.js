@@ -32,38 +32,55 @@ $(document).ready(function() {
             beKilled: 18
         }
     ];
+    var fighterVal;
+    var goodGuyVal;
+    var attackersArray;
+    var attackMembers;
 
     // Loop through and display all characters
-    for (var i = 0; i < charactersArray.length; i++) {
-        var displayCharacters = $(".allCharacters").append("<div class='col-md-3'><div class='char' value='" + charactersArray[i].id + "'><img id='charImage' src=" + charactersArray[i].image + "><h4>" + charactersArray[i].name + "</h4><h4>" + charactersArray[i].startPoints + "</h4></div></div>");
-
-        var displayCharactersBtn = $(".allCharacters").append("<div class='col-md-3'><div class='char' value='" + charactersArray[i].id + "'><img id='charImage' src=" + charactersArray[i].image + "><h4>" + charactersArray[i].name + "</h4><h4>" + charactersArray[i].startPoints + "</h4></div></div>");
-        console.log(displayCharacters);
-    }
+    $.each(charactersArray, function(i, val){
+        $(".allCharacters").append("<div class='col-md-3'><div class='char' value='" + charactersArray[i].id + "'><img id='charImage' src=" + charactersArray[i].image + "><h4>" + charactersArray[i].name + "</h4><h4>" + charactersArray[i].startPoints + "</h4></div></div>");
+    });
 
     // User selection
     $(".char").on("click", function() {
-        // event.preventDefault();
-        $(this).removeClass("char");
         var player = $(this);
-        $(".goodGuy").append(player);
-        // $(".goodGuy").html(this);
-        $(this).addClass("selectPlayer");
+        goodGuyVal = $(this).attr("value");
+        player.css("border", "5px solid green");
+        player.removeClass("char");
+        $(".goodGuy").prepend(player);
+        player.addClass("selectPlayer");
         $(".char").addClass("attackers");
-        $(".attackers").removeClass("char");
+        // showAttackBtn();
 
-
-        $(".attackers").on("click", function(event) {
-            event.preventDefault();
+        $(".attackers").on("click", function() {
+            $(".attackers").removeClass("selectPlayer");
+            $(".attackers").removeClass("char");
             var fighter = $(this);
-            $(".fightTime").append(fighter);
+            fighterVal = $(this).attr("value");
+            fighter.css("border", "5px solid red");
+            $(".fightTime").html(fighter);
+            // showAttackBtn();
+            attackers();
         });
     });
 
-
     // Battle
+    // function showAttackBtn(goodGuyVal, fighterVal){
+    //     goodGuyVal = $(".selectPlayer").after("<button type='submit' id='attack' value='attackValue'>Attack</button>");
 
+    //     fighterVal = $(".attackers").after("<button type='submit' id='attack' value='attackValue'>Attack</button>");
+    // }
 
+    function attackers(attackMembers, attackersArray){   
+        attackersArray = $(".attackers").toArray();
+        $.each(attackersArray, function(i, val){
+            console.log(attackersArray);
+            var attackerBtn = ("<button type='submit' id='attack' value='"+i+"'>Attack</button>");
+            // $(".attackers").after(attackerBtn);
+        });
 
+    }
+    
 
 });
